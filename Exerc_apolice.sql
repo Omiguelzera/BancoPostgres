@@ -92,32 +92,52 @@ select * from carro;
 
 select* from apolice;
 
+
+/*Escreva o comando SQL que exiba marca e modelo de todos os carros de cor 
+vermelho cadastrados. A lista deve estar ordenada em ordem alfabética pela marca e modelo. */
+
 select marca, modelo
 from carro
 where cor ilike 'vermelho';
 
 
+
+/* Escreva o comando SQl que exiba o local de todos os acidentes ocorridos no mês de 
+maio de 2023.*/ 
+
 select local
 from acidente 
 where data between date '2023-05-01' and date '2023-05-31';
+
+
+/* Escreva o comando SQl que exiba o número de cada apólice juntamente com o nome 
+do cliente que a possui e o valor da mesa. Apresentar as apólices mais caras primeiro. */
 
 select a.numero as apolice, c.nome
 from apolice a, cliente c
 where c.numero = a.num_cliente
 order by valor DESC;
 
+
+/* Escreva o comando SQL que exiba o número de cada apólice, o nome do cliente e a 
+marca do veículo segurado, das apólices com início no mês de abril de 2023. O resultado deve 
+estar ordenado em ordem crescente pelo nome do cliente. */
 select a.numero, c.nome, r.marca
 from apolice a , cliente c , carro r
 WHERE c.numero = a.num_cliente and a.reg_carro = r.registro
 and dt_inicio between date '2023-04-01' and date '2023-04-30'
 Order by c.nome;
 
+/* Escreva o comando SQL que exiba data, horário e local, dos acidentes envolvendo o 
+HB20 grafite. A lista deverá estar ordenada pela data e horário do acidente. 
+ */
 select data, hora, local, car.modelo, car.cor
 from acidente a, apolice ap, apolice_acidente ac, carro car
 where car.modelo = 'HB20' and car.cor = 'Grafite' and car.registro = ap.reg_carro and a.codigo = ac.cod_acidente
 and ap.numero = ac.num_apolice;
 
-
+/* Escreva o comando SQL que exiba a marca do veículo, o nome do cliente e o número 
+das apólices de todos os acidentes ocorridos no mês de maio de 2023.*/
 select car.marca, c.nome, a.numero, d.data
 from carro car, cliente c, apolice a, acidente d, apolice_acidente ac
 where car.registro = a.reg_carro and c.numero = a.num_cliente and a.numero = ac.num_apolice
