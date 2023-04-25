@@ -120,3 +120,55 @@ select nome_func as funcionario
 from funcionario 
 where gerente = 1
 order by nome_func;
+
+/* aumento de 10% em todos os salarios*/
+update funcionario set salario = salario *1.1;
+/* deletando a tabela funcionario*/
+drop table funcionario;
+
+/* mostrar todos os funcionario que ganham mais que 1000*/
+select nome_func, salario
+from funcionario
+where salario >1000.00;
+
+/* contar número de funcionarios que ganham mais que 500*/
+select count(codigo) from funcionario
+where salario > 500;
+
+/* media salarial dos funcionarios*/
+select avg(salario) from funcionario;
+
+/* media salarial dos funcionarios que ganham menos que 1000*/
+select avg(salario) from funcionario
+where salario < 1000.00;
+
+/* salario maximo dos funcionarios */
+select max(salario) from funcionario;
+
+/* salario minimo dos funcionarios*/
+select min(salario) from funcionario;
+
+/*contar numero dos funcionarios*/
+select count(codigo) from funcionario;
+
+/* soma de todos os salarios dos funcionarios*/
+select sum(salario) from funcionario;
+
+/* soma dos salarios, separados por cada departamento*/
+select sum(salario), nome_depto as departamento from funcionario f, departamento d
+where d.codigo = f.cod_depto 
+group by nome_depto;
+
+/* Listar todos os funcionarios de Z/A */
+select nome_func as funcionario from funcionario
+order by nome_func desc;
+
+/* Contar todos os funcionários que possuem salário maior que 200 que pertencem ao departamento 1*/
+select count(f.codigo), nome_depto as departamento from funcionario f, departamento d
+where d.codigo = f.cod_depto and f.salario > 200 and d.codigo = 1
+group by nome_depto;
+
+/*Mostrar o nome e o salário dos funcionários que ganham mais que a média de todos os salários*/
+select nome_func, salario 
+from funcionario 
+where salario > (select avg(salario) from funcionario);
