@@ -68,48 +68,54 @@ values (6, 'Emerson Santos', '11 922387463', 6000.98,2,3,4,2);
 
 select * from funcionario;
 
+/*Mostrar o nome e o salário dos funcionários que recebem entre 6 e 8 mil. O resultado deve aparecer em ordem crescente de salário. */
+
 select nome_func, salario
 from funcionario
 where salario between 6000.00 and 8000.00;
 
+/*Mostrar o nome o e cargo de todos os funcionários. O resultado deverá aparecer em ordem crescente pelo nome do funcionário. */
 select nome_func as funcionario , nome as cargo
 from funcionario f, cargo c
 where c.codigo = f.cod_cargo 
 order by nome_func;
 
+/*Mostrar  o  nome  de  todos  os  departamentos  e  seus  respectivos  funcionários.O resultado deve aparecer em ordem alfabética por departamento e funcionário. */
 select nome_func as funcionario, nome_depto as departamento
 from funcionario f, departamento d
 where d.codigo = f.cod_depto
 order by nome_depto, nome_func;
 
+/*Mostrar  o  nome  e  o  salário  dos  funcionários  que  trabalham  no  departamento  de compras. */
 select nome_func as funcionario, nome_depto as departamento
 from funcionario f, departamento d
 where d.codigo = f.cod_depto
 and d.nome_depto ilike 'Compras';
 
-
+/*Mostrar o nome do funcionário e o nome da cidade, apenas dos funcionários que residem em cidades que possuem a palavra São no nome. */
 select nome_func as funcionario, nome as cidade
 from funcionario f, cidade c
 where c.codigo = f.cod_cid 
 and c.nome ilike '%sao%';
 
-
+/*Qual  o  nome,  salário  e  o  cargo  dos  funcionários  que  moram  em  Campinas?  O resultado deve aparecer em ordem decrescente de salário. */
 select nome_func as funcionario, c.nome as cargo, salario, cid.nome
 from funcionario f, cargo c, cidade cid
 where c.codigo = f.cod_cargo and cid.codigo = f.cod_cid 
 and cid.nome ilike 'campinas';
 
-
+/* Esse foi um teste que eu estava fazendo para verificar um erro !!!!*/
 select nome_func as funcionario, cid.nome as cidade
 from funcionario f, cidade cid
 where cid.codigo = f.cod_cid;
 
-
+/*Mostrar o nome, a cidade onde mora, e o departamento onde trabalha dos funcionários que são estagiários.  */
 select nome_func as funcionario, cid.nome as cidade, d.nome_depto, c.nome as cargo
 from funcionario f, cidade cid, departamento d, cargo c
 where cid.codigo = f.cod_cid and d.codigo = f.cod_depto and c.codigo = f.cod_cargo
 and c.nome ilike 'estagiario';
 
+/*Mostrar o nome de todos os funcionários que são subordinados do gerente Antonio Leite.O resultado deve aparecer em ordem alfabética. */
 select nome_func as funcionario 
 from funcionario 
 where gerente = 1
